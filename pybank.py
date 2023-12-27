@@ -1,7 +1,6 @@
 import os
 import csv
-import pandas as pd 
-#import numpy as np
+
 
 month_col = []
 pl_total_col = []
@@ -11,7 +10,6 @@ period_two = []
 greatest_inc = []
 count = 0
 
-df = pd.read_csv("C:/Users/jwoot/Documents/GWU-VIRT-DATA-PT-08-2023-U-LOLC/python-challenge/PyBank/resources/budget_data.csv")
 with open("C:/Users/jwoot/Documents/GWU-VIRT-DATA-PT-08-2023-U-LOLC/python-challenge/PyBank/resources/budget_data.csv") as csvfile:
     csvreader = csv.reader(csvfile,delimiter = ',')
     #skip header
@@ -22,12 +20,15 @@ with open("C:/Users/jwoot/Documents/GWU-VIRT-DATA-PT-08-2023-U-LOLC/python-chall
 
         #tally months
         month_col.append(row[0])
+
         total_months = len(str(month_col))
 
         #sum all profits and losses
          
         pl_total_col.append(int(row[1]))
-        
+        greatest_inc = max(pl_total_col)
+        greatest_dec = min(pl_total_col)
+
 
         
         
@@ -41,12 +42,10 @@ for col in pl_total_col:
 for col in range(len(period_one)):
     change_in_pl.append(period_two[col]- period_one[col])
         
-pl_total = sum(i for i in pl_total_col)
+pl_total = sum(pl_total_col)
 pl_average = round(sum(change_in_pl)/len(change_in_pl),2)
 
 #greatest increase and decrease
-greatest_inc = df.loc[df['Profit/Losses'] == df['Profit/Losses'].max()]
-greatest_dec = df[df['Profit/Losses'] == df['Profit/Losses'].min()]
 
 
 
